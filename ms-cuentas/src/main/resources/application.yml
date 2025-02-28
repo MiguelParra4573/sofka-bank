@@ -1,0 +1,48 @@
+spring:
+  application:
+    name: ms-cuentas
+  profiles:
+    active: dev
+  datasource:
+    url: jdbc:postgresql://localhost:5432/microservicios
+    username: user
+    password: password
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+  kafka:
+    consumer:
+      bootstrap-servers: kafka:9092
+      group-id: grupo-ms-cuentas-reply
+      auto-offset-reset: earliest
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+  security:
+    user:
+      name: admin
+      password: admin123
+
+server:
+  port: 8082
+  servlet:
+    context-path: /api
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: DEBUG
+    org.hibernate.SQL: DEBUG
+    com.bank.ms_clientes: DEBUG
+
+
+
+
+
